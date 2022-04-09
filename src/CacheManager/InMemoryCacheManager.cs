@@ -27,7 +27,7 @@ public class InMemoryCacheManager : ICacheManager
         /// <param name="value"></param>
         /// <param name="expirationInMinutes"></param>
         /// <returns></returns>
-        public T Set<T>(string key, T value, Nullable<int> expirationInHours = null)
+        public T Set<T>(string key, T value, Nullable<int> expirationInHours = null, CacheExpireType? cacheExpireType = CacheExpireType.Minute)
         {
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
 
@@ -35,7 +35,7 @@ public class InMemoryCacheManager : ICacheManager
 
             TimeSpan? span = null;
 
-            switch (_cacheSettings.CacheExpireType)
+            switch (cacheExpireType ?? _cacheSettings.CacheExpireType)
             {
                 case CacheExpireType.Minute:
                     span = TimeSpan.FromMinutes(expireTime);
