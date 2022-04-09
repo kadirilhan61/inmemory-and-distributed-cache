@@ -21,10 +21,10 @@ public class RedisCacheManager : ICacheManager
         }
 
 
-        public T Set<T>(string key, T value, int? expirationInHours = null, CacheExpireType? cacheExpireType = CacheExpireType.Minute)
+        public T Set<T>(string key, T value, CacheExpireType? cacheExpireType = CacheExpireType.Minute, int? expirationInTime = null)
         {
             var options = new DistributedCacheEntryOptions();
-            var expireTime = expirationInHours.HasValue ? expirationInHours.Value : _cacheSettings.CacheExpirationInTime;
+            var expireTime = expirationInTime.HasValue ? expirationInTime.Value : _cacheSettings.CacheExpirationInTime;
 
             TimeSpan? span = null;
 

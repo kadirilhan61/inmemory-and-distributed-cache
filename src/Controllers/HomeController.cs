@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Mvc;
         [Route("index"),HttpGet]
         public bool Index()
         {
-            _cacheManager.Set<string>("test", "test", 1); 
+            _cacheManager.Set<string>("test", "test",null, 1); 
             return true;
         }  
 
@@ -35,7 +35,7 @@ using Microsoft.AspNetCore.Mvc;
         [Route("index2"),HttpGet]
         public bool Index2([FromServices]ICacheManager cacheManager)
         {
-            cacheManager.Set<string>("test2", "test", 1); 
+            cacheManager.Set<string>("test2", "test",null, 1); 
             return true;
         } 
     }

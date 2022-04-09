@@ -27,11 +27,11 @@ public class InMemoryCacheManager : ICacheManager
         /// <param name="value"></param>
         /// <param name="expirationInMinutes"></param>
         /// <returns></returns>
-        public T Set<T>(string key, T value, Nullable<int> expirationInHours = null, CacheExpireType? cacheExpireType = CacheExpireType.Minute)
+        public T Set<T>(string key, T value, CacheExpireType? cacheExpireType = CacheExpireType.Minute, int? expirationInTime = null)
         {
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
 
-            var expireTime = expirationInHours.HasValue ? expirationInHours.Value : _cacheSettings.CacheExpirationInTime;
+            var expireTime = expirationInTime.HasValue ? expirationInTime.Value : _cacheSettings.CacheExpirationInTime;
 
             TimeSpan? span = null;
 
