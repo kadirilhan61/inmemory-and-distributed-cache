@@ -47,7 +47,7 @@ public class InMemoryCacheManager : ICacheManager
                     span = TimeSpan.FromDays(expireTime);
                     break;
                 default:
-                    span = TimeSpan.FromMinutes(expireTime);
+                    span = TimeSpan.FromSeconds(expireTime);
                     break;
             }
 
@@ -63,25 +63,7 @@ public class InMemoryCacheManager : ICacheManager
             _memoryCache.Set(key, value, options);
             return value;
         }
-        /// <summary>
-        /// Generic Type olarak Cache'e data set ediyor.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="expirationInMinutes"></param>
-        /// <returns></returns>
-        public T SetForExcel<T>(object key, T value)
-        {
-            MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
-
-            options.SetPriority(CacheItemPriority.Normal);
-            options.SetSlidingExpiration(TimeSpan.FromSeconds(120));
-            options.AddExpirationToken(new CancellationChangeToken(_resetCacheToken.Token));
-
-            _memoryCache.Set(key, value, options);
-            return value;
-        }
+       
 
         /// <summary>
         /// Cache var mı diye kontrol ediyor.

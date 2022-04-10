@@ -40,7 +40,7 @@ public class RedisCacheManager : ICacheManager
                     span = TimeSpan.FromDays(expireTime);
                     break;
                 default:
-                    span = TimeSpan.FromMinutes(expireTime);
+                    span = TimeSpan.FromSeconds(expireTime);
                     break;
             }
 
